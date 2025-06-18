@@ -1,0 +1,26 @@
+2025-02-05 14:30:34,852 INFO: MultiKey startup [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:38]
+2025-02-05 14:30:57,798 ERROR: Registration error: (sqlite3.OperationalError) no such column: user.password_hash
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.password_hash AS user_password_hash, user.mac AS user_mac, user.pubk AS user_pubk, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.email = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('test4@gmail.com', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8) [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:177]
+2025-02-05 14:33:09,615 INFO: MultiKey startup [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:38]
+2025-02-05 14:33:23,390 ERROR: Registration error: (sqlite3.OperationalError) no such column: user.created_at
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.password AS user_password, user.mac AS user_mac, user.pubk AS user_pubk, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.email = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('test4@gmail.com', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8) [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:177]
+2025-02-05 14:33:44,643 ERROR: Registration error: (sqlite3.OperationalError) no such column: user.created_at
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.password AS user_password, user.mac AS user_mac, user.pubk AS user_pubk, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.email = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('test4@gmail.com', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/14/e3q8) [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:177]
+2025-02-05 14:36:32,175 INFO: MultiKey startup [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:38]
+2025-02-05 14:36:38,327 INFO: New user registered: test4@gmail.com [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:171]
+2025-02-05 14:36:56,369 INFO: New user registered: Test4@gmail.com [in C:\Users\INSAN27\Downloads\novel-cryptography-project-master\novel-cryptography-project-master\flask_app\app.py:171]

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiKey Cryptography - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1c2c 0%, #2a3045 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .title {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .form-body {
+            margin-bottom: 30px;
+        }
+
+        .the-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus {
+            border-color: #646cff;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin-left: 10px;
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(45deg, #646cff, #8b92ff);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100, 108, 255, 0.4);
+        }
+
+        .form-footer {
+            text-align: center;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: #646cff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .form-footer a:hover {
+            color: #8b92ff;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon svg {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .progress {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #646cff;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="form-container">
+            <div class="form-body">
+                <h2 class="title">Welcome to MultiKey</h2>
+                <form method="POST" class="the-form" enctype="multipart/form-data">
+                    <div>
+                        <label for="mail">Email</label>
+                        <div class="input-icon">
+                            <input type="email" name="mail" id="mail" placeholder="Enter your email" required>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M2.5 6.67v6.66c0 1.84 1.5 3.34 3.33 3.34h8.34c1.83 0 3.33-1.5 3.33-3.34V6.67c0-1.84-1.5-3.34-3.33-3.34H5.83c-1.83 0-3.33 1.5-3.33 3.34z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M2.5 7.5l6.67 4.17c.83.5 1.83.5 2.66 0L18.5 7.5" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="password">Password</label>
+                        <div class="input-icon">
+                            <input type="password" name="passw" id="password" placeholder="Enter your password" required>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M15.83 9.17v-2.5c0-3.33-2.5-5.84-5.83-5.84S4.17 3.34 4.17 6.67v2.5" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M10 15.84c-1.67 0-3.33-.84-3.33-2.5 0-1.67 1.66-2.5 3.33-2.5 1.67 0 3.33.83 3.33 2.5 0 1.66-1.66 2.5-3.33 2.5z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" id="password-strength"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="mac">MAC Address</label>
+                        <div class="input-icon">
+                            <input type="text" name="mac" id="mac" placeholder="Enter your MAC address" required>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 18.33h5c4.17 0 5.83-1.66 5.83-5.83v-5c0-4.17-1.66-5.83-5.83-5.83h-5c-4.17 0-5.83 1.66-5.83 5.83v5c0 4.17 1.66 5.83 5.83 5.83z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M13.33 10H6.67" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M10 13.33V6.67" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="pubk" class="file-upload-label">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 17v-6m0 0l3-3m-3 3l3 3M5 17v1a2 2 0 002 2h10a2 2 0 002-2v-1M5 17v-6a2 2 0 012-2h10a2 2 0 012 2v6" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Choose Public Key File</span>
+                            <span class="file-name" id="file-name">No file chosen</span>
+                        </label>
+                        <input type="file" name="pubk" id="pubk" accept=".pem" required>
+                    </div>
+
+                    <input type="submit" value="Create Account">
+                </form>
+                
+                <div class="error-message" id="error-message">{{error}}</div>
+            </div>
+
+            <div class="form-footer">
+                <div>
+                    <span>Already have an account?</span> 
+                    <a href="/login">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // File upload handling
+        document.getElementById('pubk').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function(e) {
+            const password = e.target.value;
+            let strength = 0;
+            
+            if(password.length >= 8) strength += 25;
+            if(password.match(/[a-z]/)) strength += 25;
+            if(password.match(/[A-Z]/)) strength += 25;
+            if(password.match(/[0-9]/)) strength += 25;
+            
+            document.getElementById('password-strength').style.width = strength + '%';
+            document.getElementById('password-strength').style.background = 
+                strength <= 25 ? '#ff4444' :
+                strength <= 50 ? '#ffa700' :
+                strength <= 75 ? '#2196f3' : '#00c851';
+        });
+
+        // Form animations
+        gsap.from(".title", {
+            duration: 0.8,
+            y: -20,
+            opacity: 0,
+            ease: "power3.out",
+            delay: 0.2
+        });
+
+        gsap.from(".the-form > div", {
+            duration: 0.6,
+            y: 20,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.4
+        });
+
+        // Error message animation
+        if(document.getElementById('error-message').textContent.trim()) {
+            gsap.from("#error-message", {
+                duration: 0.3,
+                y: -10,
+                opacity: 0,
+                ease: "power2.out",
+                delay: 0.8
+            });
+        }
+    
+        
+    </script>
+</body>
+</html>
